@@ -1,0 +1,20 @@
+<h1>
+    {{titulo}}
+</h1>
+
+
+Nombre:{{productoSelected.nombre}} <br />
+Tipo: {{productoSelected.tipo}} <br />
+precio: {{productoSelected.precio}} <br />
+Apto para veganos: {{productoSelected.vegano}}
+<h2>Calorias:</h2>
+<li *ngFor="let producto of productoSelected.ingredients">
+    {{producto}} : {{calorias[producto]}}
+    
+    <span *ngIf="!calorias[producto]">
+
+        <input type="number" [(ngModel)]="numCalorias[producto]"/>
+        <button (click)="setCalorias(producto);">SET CALORIAS</button>
+    </span>
+
+</li>

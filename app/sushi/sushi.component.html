@@ -1,0 +1,55 @@
+<!-- CODI PER LA CLASSE-->
+<calorias-tag [productoSelected]=sushis[sushiSelected]
+(onGetCalorias)="getCalorias($event)"
+></calorias-tag>
+
+<h1>
+    {{titulo}}
+</h1>
+<input type="text" [(ngModel)]="titulo" />
+<br />
+<h3> FORMULARIO NUEVO SUSHI</h3>
+Nombre: <input type="text" [(ngModel)]="sushi.nombre" /> <br />
+Tipo: <input type="text" [(ngModel)]="sushi.tipo" /><br />
+Precio: <input type="text" [(ngModel)]="sushi.precio" /><br />
+Vegano: <select type="text" [(ngModel)]="sushi.vegano"><br />
+    <option value="si"> SI </option>
+    <option value="no"> NO </option>
+</select>
+{{sushi.vegano}}
+<button (click)="addSushi()" >ADD SUSHI</button>
+
+<ol>
+    <li *ngFor='let sushi of sushis; let i = index'>
+        Nombre:{{sushi.nombre}} <br />
+        Tipo: {{sushi.tipo}} <br />
+        precio: {{sushi.precio}} <br />
+        Apto para veganos: {{sushi.vegano}}
+        <button (click)="borraSushi(i)"> Borrar </button>
+    </li>
+</ol>
+
+<h3>SELECCIONA UN SUSHI DELS DISPONIBLES</h3>
+Id sushi seleccionat  {{sushiSelected}}
+<select [(ngModel)]="sushiSelected">
+    <option *ngFor="let sushi of sushis; let i=index" value="{{i}}"> 
+        {{sushi.nombre }}
+    </option>
+</select>
+
+<h3>MOSTRA ELS INGREDIENTES DE CADA SUSHI, ESBORRA INGREDIENT</h3>
+Nombre:{{ sushis[sushiSelected].nombre }} <br />
+Tipo:{{ sushis[sushiSelected].tipo }} <br />
+Precio:{{ sushis[sushiSelected].precio }} <br />
+Vegano:{{ sushis[sushiSelected].vegano }} <br />
+Ingredients:
+<span *ngFor="let ingredient of sushis[sushiSelected].ingredients; let i=index">
+    {{ingredient}} 
+    {{ (calorias[ingredient]!=undefined)?calorias[ingredient]+"kcal":" "  }} ,
+
+    <button (click)="borraIngredient(i)">Borrar</button> 
+</span>
+
+<h3>AFEGEIX UN INGREDIENT</h3>
+Nom ingredient <input type="text" [(ngModel)]="nouIngredient"/> 
+<button (click)="addIngredient();" >ADD INGREDIENT</button>
